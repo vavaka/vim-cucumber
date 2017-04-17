@@ -109,30 +109,34 @@ exe 'syn match cucumberScenario "\%(^\s*\)\@<='.s:pattern('scenario').':"'
 exe 'syn match cucumberScenarioOutline "\%(^\s*\)\@<='.s:pattern('scenario_outline').':"'
 exe 'syn match cucumberExamples "\%(^\s*\)\@<='.s:pattern('examples').':" nextgroup=cucumberExampleTable skipempty skipwhite'
 
-syn match   cucumberPlaceholder   "<[^<>]*>" contained containedin=@cucumberStepRegions
-syn match   cucumberExampleTable  "\%(^\s*\)\@<=|.*" contains=cucumberDelimiter
-syn match   cucumberDelimiter     "\\\@<!\%(\\\\\)*\zs|" contained
-syn match   cucumberTags          "\%(^\s*\)\@<=\%(@[^@[:space:]]\+\s\+\)*@[^@[:space:]]\+\s*$" contains=@NoSpell
+syn match   cucumberSingleQuotedString   "'[^']*'" contained containedin=@cucumberStepRegions
+syn match   cucumberDoubleQuotedString   "\"[^\"]*\"" contained containedin=@cucumberStepRegions
+syn match   cucumberPlaceholder          "<[^<>]*>" contained containedin=@cucumberStepRegions
+syn match   cucumberExampleTable         "\%(^\s*\)\@<=|.*" contains=cucumberDelimiter
+syn match   cucumberDelimiter            "\\\@<!\%(\\\\\)*\zs|" contained
+syn match   cucumberTags                 "\%(^\s*\)\@<=\%(@[^@[:space:]]\+\s\+\)*@[^@[:space:]]\+\s*$" contains=@NoSpell
 
 call s:Add('Then')
 call s:Add('When')
 call s:Add('Given')
 
-hi def link cucumberUnparsedComment   cucumberComment
-hi def link cucumberComment           Comment
-hi def link cucumberLanguage          SpecialComment
-hi def link cucumberFeature           Macro
-hi def link cucumberBackground        Define
-hi def link cucumberScenario          Define
-hi def link cucumberScenarioOutline   Define
-hi def link cucumberExamples          Define
-hi def link cucumberPlaceholder       Constant
-hi def link cucumberDelimiter         Delimiter
-hi def link cucumberTags              Tag
-hi def link cucumberString            String
-hi def link cucumberGiven             Conditional
-hi def link cucumberWhen              Function
-hi def link cucumberThen              Type
+hi def link cucumberUnparsedComment    cucumberComment
+hi def link cucumberComment            Comment
+hi def link cucumberLanguage           SpecialComment
+hi def link cucumberFeature            Macro
+hi def link cucumberBackground         Define
+hi def link cucumberScenario           Define
+hi def link cucumberScenarioOutline    Define
+hi def link cucumberExamples           Define
+hi def link cucumberSingleQuotedString String
+hi def link cucumberDoubleQuotedString String
+hi def link cucumberPlaceholder        Constant
+hi def link cucumberDelimiter          Delimiter
+hi def link cucumberTags               Tag
+hi def link cucumberString             String
+hi def link cucumberGiven              Conditional
+hi def link cucumberWhen               Function
+hi def link cucumberThen               Type
 
 let b:current_syntax = "cucumber"
 
