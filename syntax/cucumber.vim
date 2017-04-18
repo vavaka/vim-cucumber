@@ -91,6 +91,7 @@ function! s:Add(name)
   exe 'syn region cucumber'.a:name.'String start=+\%(^\s*\)\@<="""+ end=+"""+ contained'.next
   exe 'syn match cucumber'.a:name.'Table "\%(^\s*\)\@<=|.*" contained contains=cucumberDelimiter'.next
   exe 'hi def link cucumber'.a:name.'Comment cucumberComment'
+  exe 'hi def link cucumber'.a:name.'Table Constant'
   exe 'hi def link cucumber'.a:name.'String cucumberString'
   exe 'hi def link cucumber'.a:name.'But cucumber'.a:name.'And'
   exe 'hi def link cucumber'.a:name.'And cucumber'.a:name
