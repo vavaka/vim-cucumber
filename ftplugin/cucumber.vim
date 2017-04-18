@@ -124,19 +124,9 @@ function! CucumberComplete(findstart,base) abort
         let steps += [step[3][1:-2]]
       elseif step[3] =~ '^/\^.*\$/$'
         let pattern = step[3][2:-3]
-        let pattern = substitute(pattern,'\C^(?:|I )','I ','')
-        let pattern = s:bsub(pattern,'\\[Sw]','w')
-        let pattern = s:bsub(pattern,'\\d','1')
-        let pattern = s:bsub(pattern,'\\[sWD]',' ')
-        let pattern = s:bsub(pattern,'\[\^\\\="\]','_')
-        let pattern = s:bsub(pattern,'[[:alnum:]. _-][?*]?\=','')
-        let pattern = s:bsub(pattern,'\[\([^^]\).\{-\}\]','\1')
-        let pattern = s:bsub(pattern,'+?\=','')
-        let pattern = s:bsub(pattern,'(\([[:alnum:]. -]\{-\}\))','\1')
-        let pattern = s:bsub(pattern,'\\\([[:punct:]]\)','\1')
-        if pattern !~ '[\\()*?]'
-          let steps += [pattern]
-        endif
+        let pattern = substitute(pattern, '\v(\(\?:(\s*)\W*(\w*).*\)\?)', '\2[\3]', 'g') "match step like /^Something should(?: (not))? be ...$/
+        let pattern = substitute(pattern, '\v(\([^)]*\))', '_', 'g')
+        let steps += [pattern]
       endif
     endif
   endfor
